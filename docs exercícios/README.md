@@ -17,7 +17,8 @@ docs exercícios/
 ├── exercicio-04-generics.md            # Generics
 ├── exercicio-05-api-rest.md            # API REST com Express
 ├── exercicio-07-08-middleware-service.md # Middleware + UserService
-└── exercicio-09-10-erros-produtos.md   # AppError + CRUD Produtos
+├── exercicio-09-10-erros-produtos.md   # AppError + CRUD Produtos
+└── exercicio-11-12-requesthandler-repository.md # RequestHandler + Repository
 ```
 
 ---
@@ -35,6 +36,8 @@ docs exercícios/
 | 8 | UserService | `src/services/user.service.ts`, `src/models/user.ts` | `exercicios-7-e-8` |
 | 9 | AppError + ErrorHandler | `src/errors/app-error.ts`, `src/middlewares/error-handler.middleware.ts` | `exercicios-9-e-10` |
 | 10 | CRUD Produtos | `src/services/product.service.ts`, `src/models/product.ts` | `exercicios-9-e-10` |
+| 11 | RequestHandler tipado | `src/controllers/*.ts`, `src/types/http.types.ts` | `exercicios-11-e-12` |
+| 12 | Repository JSON | `src/repositories/user.repository.ts`, `src/data/users.json` | `exercicios-11-e-12` |
 
 ---
 
@@ -76,6 +79,32 @@ src/
 │   ├── user.service.ts
 │   └── product.service.ts
 └── server.ts       # Rotas users + products + errorHandler
+```
+
+### Final (Ex 11-12) - Camadas separadas
+```
+src/
+├── controllers/          # HTTP: handlers tipados com RequestHandler
+│   ├── user.controller.ts
+│   └── product.controller.ts
+├── data/                 # Persistência
+│   └── users.json
+├── errors/
+│   └── app-error.ts
+├── middlewares/
+│   ├── logger.middleware.ts
+│   └── error-handler.middleware.ts
+├── models/               # Contratos das entidades
+│   ├── user.ts
+│   └── product.ts
+├── repositories/         # Persistência (JSON)
+│   └── user.repository.ts
+├── services/             # Regras de negócio
+│   ├── user.service.ts   # (recebe repository por DI)
+│   └── product.service.ts
+├── types/                # Contratos HTTP explícitos
+│   └── http.types.ts
+└── server.ts             # Composition root + registro de rotas
 ```
 
 ---
